@@ -1,38 +1,51 @@
 # Vibe Research Template
 
-A minimal template for AI-assisted research on a specific topic.
+A minimal template for AI-assisted research on a specific topic using Claude Code.
 
 ## Structure
 
 ```
-CLAUDE.md                    # Claude instructions
-sources/
-  _index.md                  # Source tracker
+.env.example                 # API key placeholders (copy to .env, never commit)
+CLAUDE.md                    # Claude instructions — living document, keep under 100 lines
 instructions/
-  tools.md                   # Available tools
-  methodology.md             # Research methodology template
+  tools.md                   # Available tools and how to call them
+  methodology.md             # Research scope template — fill in at topic start
+sources/
+  _index.md                  # Source tracker — maintained by Claude, not manually
 results/
   _draft.md                  # Working synthesis
 ```
 
 ## How to Use
 
-1. **Fork or copy this repository** for your research topic
-2. **Choose your language** — all template files are in English by default
-3. **Tell Claude Code your language preference** at the start of the first session
+1. **Fork or copy this repository** for your research topic — one repo per topic
+2. **Choose your language** — all template files are in English by default.
+   Tell Claude Code your preference at the start of the first session and it will
+   generate localized versions of all files.
+3. **Set up API keys** (optional) — copy `.env.example` to `.env` and fill in keys
+   if you plan to transcribe audio files. `.env` is gitignored and stays local.
+4. **Define the topic** — open `instructions/methodology.md` and fill it in,
+   or just tell Claude Code what you're researching and it will help you fill it
+5. **Add sources** — Claude handles the index automatically. Just:
+   - drop files into `sources/`
+   - or share links and content directly in the chat
+6. **Synthesize** — Claude builds up `results/_draft.md` as sources are processed.
+   Final documents go in `results/` with descriptive names.
 
-   Claude will generate localized versions of `CLAUDE.md`, `instructions/`, and `results/` files in your chosen language, leaving the template originals as reference.
+## Supported Source Types
 
-4. **Define the topic** — fill in `instructions/methodology.md`
-5. **Add sources** — register each one in `sources/_index.md` before using it
-6. **Synthesize** — build up `results/_draft.md` as you go
-
-## YouTube Sources
-
-Use the tool described in `instructions/tools.md` to extract transcripts from YouTube videos before analysis.
+| Type | How to add |
+|------|------------|
+| YouTube video | Paste link in chat — Claude fetches the transcript |
+| Article / webpage | Paste link in chat — registered as URL reference |
+| PDF | Drop into `sources/` — Claude extracts text automatically |
+| Text / notes | Paste in chat — Claude saves to `sources/` |
+| Audio file | Convert to text first (see `instructions/tools.md`), then drop into `sources/` |
 
 ## Tips
 
-- Keep `CLAUDE.md` under 100 lines — it's a living document, not a manual
-- One research topic per repository
-- Commit regularly so you can trace how conclusions evolved
+- `CLAUDE.md` is a living document — Claude updates it when you correct an approach twice.
+  If it grows past 120 lines, Claude will suggest an optimisation session.
+- Commit regularly so you can trace how conclusions evolved.
+- Source notes are saved as `{source-name}.notes.md` alongside each source —
+  key quotes, relevance to the topic, ideas to explore further.
