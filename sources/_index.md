@@ -1,7 +1,9 @@
 # Sources Index
 
-| # | Title | Type | URL / File | Status | Notes |
-|---|-------|------|------------|--------|-------|
-| 1 | | | | | |
+| # | Title | Type | URL | Local file | Status | Notes |
+|---|-------|------|-----|------------|--------|-------|
 
-**Status values:** `pending` · `processing` · `done` · `skipped`
+**Types:** `youtube` · `article` · `paper` · `text`  
+**Status:** `pending` · `processing` · `done` · `skipped`
+
+<!-- Maintained by Claude. Do not edit manually. -->

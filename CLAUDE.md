@@ -10,10 +10,34 @@ This project is a focused investigation of a specific topic. The topic is define
 
 ## Working with Sources
 
-- Never invent sources. If a source is not in `sources/` — say so.
+- Never invent sources. If a source is not in `sources/` and was not shared in the current session — say so.
 - When referencing a fact, always cite the source and include a quote:
   > "exact quote from the source" — [title] (file or URL)
-- New source → add to `sources/_index.md` first, then use it.
+
+### Source intake — two flows
+
+**Flow 1: file dropped into `sources/`**
+At session start, scan `sources/` for files not yet listed in `_index.md`. Add each one automatically — no user action needed.
+
+Supported formats:
+- `.md` / `.txt` — use as-is
+- `.pdf` — extract text and save as `{name}.md` alongside the original
+- `.mp3` / `.m4a` / `.wav` / other audio — must be converted to `.md` before processing (see `instructions/tools.md`)
+
+**Flow 2: link or content shared in chat**
+When the user shares a URL, text, or file in the conversation:
+- If it's a YouTube link → fetch transcript via tool in `instructions/tools.md`, save to `sources/`
+- If it's another URL → save as a reference entry in `_index.md` (no local file required)
+- If it's pasted text → save to `sources/` as a `.md` file
+
+In all cases: register in `_index.md` and confirm to the user. Never ask the user to update `_index.md` manually.
+
+### Source notes
+
+After analysing a source, save key excerpts and relevance notes to `{source-name}.notes.md` alongside the source file. Structure:
+- why this source is relevant to the research topic
+- key quotes with timestamps or page references
+- ideas to explore further
 
 ## Working with Results
 

@@ -60,4 +60,47 @@ YouTube timestamp links use seconds: `&t=183` jumps to 3:03 in the video.
 
 ---
 
-<!-- Add other tools below as needed -->
+## Audio Transcription
+
+Audio files (`.mp3`, `.m4a`, `.wav`, etc.) must be converted to text before they can be used as sources.
+
+**General approach:** use any transcription tool you have available, save the result as `{name}.md` in `sources/`, then drop it into the conversation or let Claude detect it at session start.
+
+**Options:**
+- Any online transcription service (upload file, copy text, save as `.md`)
+- macOS Sonoma+ has built-in transcription in Voice Memos — export as text
+- Phone apps: Otter.ai, Whisper transcription apps
+
+### Advanced: API-based transcription (single curl command)
+
+If you have an API key, these work on any platform with no installation.
+
+**Groq (free tier):**
+1. Get a key at https://console.groq.com/keys
+2. Copy `.env.example` to `.env` and set `GROQ_API_KEY=your_key_here`
+3. Run:
+```bash
+source .env
+curl -s https://api.groq.com/openai/v1/audio/transcriptions \
+  -H "Authorization: Bearer $GROQ_API_KEY" \
+  -F "file=@sources/recording.mp3" \
+  -F "model=whisper-large-v3" \
+  -F "response_format=text" \
+  > sources/recording.md
+```
+
+**OpenAI ($0.006/min):**
+```bash
+curl -s https://api.openai.com/v1/audio/transcriptions \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -F "file=@sources/recording.mp3" \
+  -F "model=whisper-1" \
+  -F "response_format=text" \
+  > sources/recording.md
+```
+
+---
+
+## PDF Sources
+
+No extra tools needed — Claude Code reads PDFs natively. Drop the file into `sources/` and Claude will extract the text automatically.
