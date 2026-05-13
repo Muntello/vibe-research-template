@@ -60,6 +60,8 @@ At the start of a research topic, ask the user for their preferred language and 
 Tool descriptions are in `instructions/tools.md`.
 Research methodology template is in `instructions/methodology.md`.
 
+For any internet search or fact-check, use the Exa MCP server (`web_search_exa`, `web_fetch_exa`). Never answer from training data when the question is about current state of the world.
+
 ## Maintaining This File
 
 **When to add rules:** if the user corrected the same approach twice — that's a signal to add a rule. A one-off correction does not require an update.
