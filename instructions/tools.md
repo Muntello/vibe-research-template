@@ -1,5 +1,43 @@
 # Research Tools
 
+## Internet Search — Exa MCP
+
+**Configured in:** `.mcp.json` (project root)
+**Server:** `https://mcp.exa.ai/mcp` — no API key required for default use.
+
+If you hit rate limits on intensive research, grab a free key at
+https://dashboard.exa.ai/api-keys and add it as a header in `.mcp.json`:
+`"headers": { "x-api-key": "YOUR_KEY" }`.
+
+### When to use
+
+Use Exa for any task that requires fresh information from the web:
+- verifying a factual claim
+- finding sources for the current research topic
+- looking up recent events, papers, announcements, or releases
+- following up on a name, term, or product mentioned in a source
+
+Never answer from training data when the question is about current state of the
+world. If you have not seen the source in `sources/` and have not searched the
+web in this session — search first.
+
+### Available tools
+
+| Tool | Purpose |
+|------|---------|
+| `web_search_exa` | General web search, returns cleaned content snippets |
+| `web_fetch_exa` | Retrieve a single URL's full content as markdown |
+
+### Workflow after searching
+
+1. If a result is worth keeping, save it as a source:
+   - URL only → register as a reference entry in `sources/_index.md`
+   - Full page worth quoting → use `web_fetch_exa` to grab the content, save to `sources/{slug}.md`, register in `_index.md`
+2. Always cite with the exact URL when referencing a fact from search results.
+3. Flag any source older than 2 years explicitly.
+
+---
+
 ## YouTube Transcript Extractor
 
 **URL:** https://youtubetranscribe.khabaroff.studio  

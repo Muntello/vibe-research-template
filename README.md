@@ -6,6 +6,7 @@ A minimal template for AI-assisted research on a specific topic using Claude Cod
 
 ```
 .env.example                 # API key placeholders (copy to .env, never commit)
+.mcp.json                    # MCP servers (Exa for internet search)
 CLAUDE.md                    # Claude instructions — living document, keep under 100 lines
 instructions/
   tools.md                   # Available tools and how to call them
@@ -24,6 +25,7 @@ results/
    generate localized versions of all files.
 3. **Set up API keys** (optional) — copy `.env.example` to `.env` and fill in keys
    if you plan to transcribe audio files. `.env` is gitignored and stays local.
+   Internet search via Exa MCP (`.mcp.json`) works out of the box — no key needed.
 4. **Define the topic** — open `instructions/methodology.md` and fill it in,
    or just tell Claude Code what you're researching and it will help you fill it
 5. **Add sources** — Claude handles the index automatically. Just:
