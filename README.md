@@ -28,6 +28,7 @@ results/
    Internet search via Exa MCP (`.mcp.json`) works out of the box — no key needed.
 4. **Define the topic** — open `instructions/methodology.md` and fill it in,
    or just tell Claude Code what you're researching and it will help you fill it
+   through a short conversation (especially the "why this matters to me" part).
 5. **Add sources** — Claude handles the index automatically. Just:
    - drop files into `sources/`
    - or share links and content directly in the chat

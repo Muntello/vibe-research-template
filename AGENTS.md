@@ -13,6 +13,7 @@ This project is a focused investigation of a specific topic. The topic is define
 
 ## Working with Sources
 
+- Each source is one `.md` file at `sources/{slug}.md` — the canonical entry. It carries title, type, URL (if any), references to local files (if any, e.g. `./{slug}.pdf` or `./{slug}.transcript.json`), and user notes. Binary or large content (PDF, audio, full transcripts) lives alongside as separate files referenced from the `.md`.
 - Never invent sources. If a source is not in `sources/` and was not shared in the current session — say so.
 - When referencing a fact, always cite the source and include a quote:
   > "exact quote from the source" — [title] (file or URL)
@@ -32,7 +33,7 @@ Supported formats:
 **Flow 2: link or content shared in chat**
 When the user shares a URL, text, or file in the conversation:
 - If it's a YouTube link → fetch transcript via tool in `instructions/tools.md`, save to `sources/`
-- If it's another URL → save as a reference entry in `_index.md` (no local file required)
+- If it's another URL → create `sources/{slug}.md` with the URL and any user notes (no need to pull full content unless asked)
 - If it's pasted text → save to `sources/` as a `.md` file
 
 In all cases: register in `_index.md` and confirm to the user. Never ask the user to update `_index.md` manually.
@@ -77,3 +78,4 @@ For any internet search or fact-check, use the Exa MCP server (`web_search_exa`,
 At the beginning of each session:
 1. Read `sources/_index.md` — what has already been processed
 2. Read `results/_draft.md` — where we left off
+3. If `instructions/methodology.md` has unfilled fields (especially **Topic** and **Why this matters to me**), offer to collect them through a short conversation before deep research begins. Don't auto-fill the motivation — the user's own voice matters here.

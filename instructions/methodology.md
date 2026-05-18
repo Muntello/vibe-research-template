@@ -1,10 +1,14 @@
 # Research Methodology
 
-Fill this out at the start of a new research topic.
+Fill this out at the start of a new research topic. If you'd rather have a
+conversation than fill fields directly, just tell Claude what you're
+investigating — Claude will ask about each item, especially the motivation
+behind it.
 
-## Topic Definition
+## Topic & Motivation
 
 **Topic:** [one sentence describing what you are investigating]
+**Why this matters to me:** [personal motivation — what triggered this, why now]
 **Core question:** [the specific question this research should answer]
 **Out of scope:** [what you are deliberately not investigating]
 
