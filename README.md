@@ -2,6 +2,26 @@
 
 A minimal template for AI-assisted research on a specific topic using Claude Code.
 
+## Quick Start
+
+Open Claude Code in an empty directory and paste this prompt:
+
+```
+Bootstrap a research project in the current directory using this template:
+https://github.com/Muntello/vibe-research-template
+
+Do this:
+1. Clone the template into a temporary subfolder.
+2. Move all files (including hidden ones: .claude/, .mcp.json, .gitignore, .env.example) into the current directory. Skip the template's .git folder.
+3. Delete the temporary subfolder.
+4. Init a fresh git repo here and make the first commit.
+5. Verify the layout exists: AGENTS.md (plus CLAUDE.md and GEMINI.md as symlinks to it), README.md, instructions/tools.md, instructions/methodology.md, sources/_index.md, results/_draft.md, .claude/settings.json, .mcp.json, .gitignore.
+
+Then ask me what topic I want to research and what made me start thinking about it.
+```
+
+Prefer to set it up by hand? See **How to Use** below.
+
 ## Structure
 
 ```
