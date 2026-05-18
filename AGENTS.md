@@ -25,14 +25,14 @@ This project is a focused investigation of a specific topic. The topic is define
 **Flow 1: file dropped into `sources/`**
 At session start, scan `sources/` for files not yet listed in `_index.md`. Add each one automatically — no user action needed.
 
-Supported formats:
-- `.md` / `.txt` — use as-is
-- `.pdf` — extract text and save as `{name}.md` alongside the original
-- `.mp3` / `.m4a` / `.wav` / other audio — must be converted to `.md` before processing (see `instructions/tools.md`)
+Supported formats (one canonical `sources/{slug}.md` per source; binary or transcripts live alongside as referenced files):
+- `.md` / `.txt` — already canonical; rename to a sensible slug if needed
+- `.pdf` — keep the PDF; create `{slug}.md` referencing it (Claude reads PDFs natively)
+- `.mp3` / `.m4a` / `.wav` / other audio — transcribe (see `instructions/tools.md`) into `{slug}.transcript.md`, then create `{slug}.md` referencing both files
 
 **Flow 2: link or content shared in chat**
 When the user shares a URL, text, or file in the conversation:
-- If it's a YouTube link → fetch transcript via tool in `instructions/tools.md`, save to `sources/`
+- If it's a YouTube link → create `sources/{slug}.md` with the URL and user notes; fetch the transcript via `instructions/tools.md` into `sources/{slug}.transcript.json` and reference it from the `.md`
 - If it's another URL → create `sources/{slug}.md` with the URL and any user notes (no need to pull full content unless asked)
 - If it's pasted text → save to `sources/` as a `.md` file
 

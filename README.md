@@ -27,6 +27,8 @@ Prefer to set it up by hand? See **How to Use** below.
 ```
 .env.example                 # API key placeholders (copy to .env, never commit)
 .mcp.json                    # MCP servers (Exa for internet search)
+.claude/
+  settings.json              # Pre-approved MCP + safe agent permissions
 CLAUDE.md                    # Claude instructions — living document, keep under 100 lines
 instructions/
   tools.md                   # Available tools and how to call them
@@ -60,7 +62,7 @@ results/
 | Type | How to add |
 |------|------------|
 | YouTube video | Paste link in chat — Claude fetches the transcript |
-| Article / webpage | Paste link in chat — registered as URL reference |
+| Article / webpage | Paste link in chat — Claude creates `sources/{slug}.md` with the URL and your notes |
 | PDF | Drop into `sources/` — Claude extracts text automatically |
 | Text / notes | Paste in chat — Claude saves to `sources/` |
 | Audio file | Convert to text first (see `instructions/tools.md`), then drop into `sources/` |
