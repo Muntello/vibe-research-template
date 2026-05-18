@@ -63,6 +63,8 @@ Research methodology template is in `instructions/methodology.md`.
 
 For any internet search or fact-check, use the Exa MCP server (`web_search_exa`, `web_fetch_exa`). Never answer from training data when the question is about current state of the world.
 
+Any Python script runs inside a project-local `.venv` — never install dependencies into the system Python. See `instructions/tools.md` for the venv workflow.
+
 ## Maintaining This File
 
 **When to add rules:** if the user corrected the same approach twice — that's a signal to add a rule. A one-off correction does not require an update.
