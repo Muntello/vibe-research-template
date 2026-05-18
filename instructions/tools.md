@@ -101,6 +101,24 @@ YouTube timestamp links use seconds: `&t=183` jumps to 3:03 in the video.
 
 ---
 
+## Telegram Posts
+
+Стандартный `https://t.me/{channel}/{post}` отдаёт только JS-виджет — без headless-браузера полезного HTML там нет. Для скрейпа из CLI используйте embed-вариант:
+
+- `https://t.me/{channel}/{post}?embed=1` — серверный HTML того же поста
+- `https://t.me/s/{channel}` — публичная превью-лента канала (последние посты)
+
+**Рабочий приём:** для любого нового Telegram-источника сразу пробуйте `?embed=1` через `curl` или `web_fetch_exa` — это работает в 99% случаев и избавляет от Playwright.
+
+```bash
+curl -sL "https://t.me/durov/123?embed=1" -A "Mozilla/5.0" \
+  > sources/durov-123.html
+```
+
+Текст поста живёт внутри `<div class="tgme_widget_message_text">`. Сохраняйте как обычный источник: канонический `sources/{slug}.md` с URL и заметкой, рядом — `{slug}.html` или извлечённый `{slug}.content.md`.
+
+---
+
 ## Audio Transcription
 
 Audio files (`.mp3`, `.m4a`, `.wav`, etc.) must be converted to text before they can be used as sources.
