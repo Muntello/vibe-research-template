@@ -145,3 +145,41 @@ curl -s https://api.openai.com/v1/audio/transcriptions \
 ## PDF Sources
 
 No extra tools needed — Claude Code reads PDFs natively. Drop the file into `sources/` and Claude will extract the text automatically.
+
+---
+
+## Python Scripts — Always Use venv
+
+**Rule:** any Python script in this project runs inside a project-local virtual environment. Never `pip install` into the system Python, never use `sudo pip`, never rely on global packages.
+
+### First-time setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+```
+
+### Each session
+
+```bash
+source .venv/bin/activate
+# now `python` and `pip` point at .venv — install and run freely
+pip install <package>
+python script.py
+deactivate  # optional, on exit
+```
+
+### One-off commands without activating
+
+```bash
+.venv/bin/python script.py
+.venv/bin/pip install <package>
+```
+
+### Hygiene
+
+- `.venv/` must be in `.gitignore` (never commit it).
+- Pin dependencies in `requirements.txt` (or `pyproject.toml`) so the env is reproducible: `pip freeze > requirements.txt`.
+- If `.venv` does not exist when a script is needed, create it first — do not fall back to system Python.
+- Prefer `python3 -m venv` over `virtualenv` / `conda` unless the user asks otherwise.
