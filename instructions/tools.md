@@ -30,11 +30,12 @@ web in this session — search first.
 
 ### Workflow after searching
 
-1. If a result is worth keeping, save it as a source:
-   - URL only → register as a reference entry in `sources/_index.md`
-   - Full page worth quoting → use `web_fetch_exa` to grab the content, save to `sources/{slug}.md`, register in `_index.md`
-2. Always cite with the exact URL when referencing a fact from search results.
-3. Flag any source older than 2 years explicitly.
+1. If a result is worth keeping, save it as a source. Every source is one canonical `sources/{slug}.md`:
+   - Bookmark only → create `sources/{slug}.md` with the URL and a short user note
+   - Full page worth quoting → fetch with `web_fetch_exa`, put the content inline in the same `.md` under `## Content` (or in a sibling `{slug}.content.md` if large) and reference it
+2. Register the source in `sources/_index.md`.
+3. Always cite with the exact URL when referencing a fact from search results.
+4. Flag any source older than 2 years explicitly.
 
 ---
 
@@ -59,24 +60,26 @@ Any time the user provides a YouTube link as a source. Always fetch the transcri
 
 ### Claude Code usage
 
-**Fetch JSON with timestamps and save to sources/ (primary workflow):**
+The transcript is a **sibling file** to the canonical `sources/{slug}.md` wrapper. First make sure the wrapper exists (with the YouTube URL and a brief user note), then fetch the transcript next to it.
+
+**Fetch JSON with timestamps (primary workflow):**
 ```bash
 curl -s "https://youtubetranscribe.khabaroff.studio/transcript/dQw4w9WgXcQ" \
-  > sources/video-title.json
+  > sources/video-title.transcript.json
 ```
 
 **Extract video ID from a full URL and fetch:**
 ```bash
 VIDEO_ID=$(echo "https://www.youtube.com/watch?v=dQw4w9WgXcQ" | grep -oP '(?<=v=)[^&]+')
 curl -s "https://youtubetranscribe.khabaroff.studio/transcript/${VIDEO_ID}" \
-  > sources/video-title.json
+  > sources/video-title.transcript.json
 ```
 
 **Shorts:**
 ```bash
 VIDEO_ID=$(echo "https://www.youtube.com/shorts/dQw4w9WgXcQ" | grep -oP '[^/]+$')
 curl -s "https://youtubetranscribe.khabaroff.studio/transcript/${VIDEO_ID}" \
-  > sources/video-title.json
+  > sources/video-title.transcript.json
 ```
 
 ### Analysing a video for relevance
@@ -93,8 +96,8 @@ YouTube timestamp links use seconds: `&t=183` jumps to 3:03 in the video.
 
 ### After fetching
 
-1. Save file to `sources/` with a descriptive name (e.g. `sources/2024-andrej-karpathy-llm-intro.md`)
-2. Add an entry to `sources/_index.md` with status `done`
+1. Confirm `sources/{slug}.md` (the canonical wrapper) exists with the YouTube URL, a short user note, and a reference to the transcript file (e.g. `sources/2024-andrej-karpathy-llm-intro.md` referencing `2024-andrej-karpathy-llm-intro.transcript.json`).
+2. Add an entry to `sources/_index.md` with status `done`.
 
 ---
 
@@ -102,7 +105,7 @@ YouTube timestamp links use seconds: `&t=183` jumps to 3:03 in the video.
 
 Audio files (`.mp3`, `.m4a`, `.wav`, etc.) must be converted to text before they can be used as sources.
 
-**General approach:** use any transcription tool you have available, save the result as `{name}.md` in `sources/`, then drop it into the conversation or let Claude detect it at session start.
+**General approach:** transcribe the audio with any tool you have available; save the transcript as `sources/{slug}.transcript.md` (a sibling file), then create the canonical `sources/{slug}.md` wrapper referencing both the audio file and the transcript.
 
 **Options:**
 - Any online transcription service (upload file, copy text, save as `.md`)
@@ -124,7 +127,7 @@ curl -s https://api.groq.com/openai/v1/audio/transcriptions \
   -F "file=@sources/recording.mp3" \
   -F "model=whisper-large-v3" \
   -F "response_format=text" \
-  > sources/recording.md
+  > sources/recording.transcript.md
 ```
 
 **OpenAI ($0.006/min):**
@@ -134,7 +137,7 @@ curl -s https://api.openai.com/v1/audio/transcriptions \
   -F "file=@sources/recording.mp3" \
   -F "model=whisper-1" \
   -F "response_format=text" \
-  > sources/recording.md
+  > sources/recording.transcript.md
 ```
 
 ---
