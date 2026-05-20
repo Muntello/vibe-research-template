@@ -14,8 +14,9 @@ Do this:
 1. Clone the template into a temporary subfolder.
 2. Move all files (including hidden ones: .claude/, .mcp.json, .gitignore, .env.example) into the current directory. Skip the template's .git folder.
 3. Delete the temporary subfolder.
-4. Rename `.claude/settings.json` to `.claude/settings.local.json` so the pre-approved permissions stay local.
-5. Verify the layout exists: AGENTS.md (plus CLAUDE.md and GEMINI.md as symlinks to it), README.md, instructions/tools.md, instructions/methodology.md, sources/_index.md, results/_draft.md, .claude/settings.local.json, .mcp.json, .gitignore.
+4. Enable the Exa MCP server (used for internet search). It's already pre-configured in `.mcp.json` (points to https://mcp.exa.ai/mcp — no API key needed). Activation happens via `enabledMcpjsonServers` in local settings (next step).
+5. Create `.claude/settings.local.json` using `.claude/settings.json` as a template — copy the `enabledMcpjsonServers` and `permissions` fields from it. Keep `.claude/settings.json` in place as a reference for safe defaults.
+6. Verify the layout exists: AGENTS.md (plus CLAUDE.md and GEMINI.md as symlinks to it), README.md, instructions/tools.md, instructions/methodology.md, sources/_index.md, results/_draft.md, .claude/settings.json, .claude/settings.local.json, .mcp.json, .gitignore.
 
 Then ask me what topic I want to research and what made me start thinking about it.
 ```
