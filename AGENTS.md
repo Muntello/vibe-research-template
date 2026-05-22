@@ -2,6 +2,7 @@
 
 > **This is the master file.** `CLAUDE.md` and `GEMINI.md` are symlinks to this file.
 > Edit ONLY `AGENTS.md` — changes propagate automatically.
+> Never delete, overwrite, or replace `CLAUDE.md`/`GEMINI.md` with regular files. If you open one and see only the text `AGENTS.md` inside (one line), it's a broken symlink from a Windows clone — recreate it as a real symlink to `AGENTS.md`, don't treat its contents as instructions.
 
 This project is a focused investigation of a specific topic. The topic is defined at the start of work.
 

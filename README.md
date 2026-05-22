@@ -16,7 +16,8 @@ Do this:
 3. Delete the temporary subfolder.
 4. Enable the Exa MCP server (used for internet search). It's already pre-configured in `.mcp.json` (points to https://mcp.exa.ai/mcp — no API key needed). Activation happens via `enabledMcpjsonServers` in local settings (next step).
 5. Create `.claude/settings.local.json` using `.claude/settings.json` as a template — copy the `enabledMcpjsonServers` and `permissions` fields from it. Keep `.claude/settings.json` in place as a reference for safe defaults.
-6. Verify the layout exists: AGENTS.md (plus CLAUDE.md and GEMINI.md as symlinks to it), README.md, instructions/tools.md, instructions/methodology.md, sources/_index.md, results/_draft.md, .claude/settings.json, .claude/settings.local.json, .mcp.json, .gitignore.
+6. Verify the layout exists: AGENTS.md, README.md, instructions/tools.md, instructions/methodology.md, sources/_index.md, results/_draft.md, .claude/settings.json, .claude/settings.local.json, .mcp.json, .gitignore.
+7. Verify that `CLAUDE.md` and `GEMINI.md` are *real* symbolic links pointing to `AGENTS.md` — not plain files containing the literal text `AGENTS.md`. On Windows, git often materializes symlinks as text files unless Developer Mode is enabled (Settings → System → For developers) or the terminal runs as administrator. If they are not real symlinks, delete them and recreate as symlinks to `AGENTS.md` (POSIX: `ln -sf AGENTS.md CLAUDE.md && ln -sf AGENTS.md GEMINI.md`; Windows PowerShell: `Remove-Item CLAUDE.md,GEMINI.md -Force; New-Item -ItemType SymbolicLink -Path CLAUDE.md -Target AGENTS.md; New-Item -ItemType SymbolicLink -Path GEMINI.md -Target AGENTS.md`).
 
 Then ask me what topic I want to research and what made me start thinking about it.
 ```
